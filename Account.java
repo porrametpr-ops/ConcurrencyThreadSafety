@@ -38,7 +38,7 @@ public class Account {
     // คำใบ้: ถ้าเธรด A เพิ่งเขียน balance ลงไป เธรด B ที่อ่านตอนนี้
     //        รับประกันได้หรือไม่ว่าจะเห็นค่าใหม่ ไม่ใช่ค่าเก่าที่ค้างในแคชของ CPU
     // ---------------------------------------------------------------
-    public int balance() {
+    public synchronized int balance() {
         return balance;
     }
 
@@ -48,7 +48,7 @@ public class Account {
     // บรรทัด balance = balance + amount; ดูเหมือนคำสั่งเดียว
     // แต่จริง ๆ คือ อ่าน → บวก → เขียน สามจังหวะที่ถูกแทรกกลางคันได้
     // ---------------------------------------------------------------
-    public void deposit(int amount) {
+    public synchronized void deposit(int amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException("amount must be positive");
         }
